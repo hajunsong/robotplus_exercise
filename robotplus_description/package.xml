@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robotplus_description</name>
+  <version>0.0.0</version>
+  <description>The robotplus_description package</description>
+
+  <maintainer email="hajunsong90@keti.re.kr">keti</maintainer>
+
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roslaunch</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>joint_state_publisher_gui</depend>
+  <depend>rviz</depend>
+  <export>
+    <architecture_independent />
+  </export>
+</package>

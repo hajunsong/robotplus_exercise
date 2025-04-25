@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/keti/ros_ws/src/robotplus_exercise/robotplus_robot_control/build/devel/setup.sh

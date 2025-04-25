@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot name="robot">
+    <link name="world" />
+    <link name="machine">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/machine.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.5 0.5 0.5 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/machine.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="base">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/base.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.67 0.68 0.69 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/base.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.594117647058824 0.594117647058824 0.594117647058824 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link1">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link2">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link3">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link4">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link5">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="link6">
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="end" />
+    <joint name="link6_end" type="fixed">
+        <origin xyz="0 0 0.12" rpy="3.1415 0 1.5708" />
+        <parent link="link6" />
+        <child link="end" />
+        <axis xyz="0 0 0" />
+    </joint>
+    <link name="gripper_cam_jig">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/gripper_cam_jig.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/gripper_cam_jig.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="cam">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/cam.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://robotplus_description/meshes/cam.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.1" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+    </link>
+    <link name="marker_plate">
+        <inertial>
+			<origin xyz="0.0 0.009 0.0" rpy="0 0 0"/>
+			<mass value="2.83099"/>
+			<inertia ixx="0.04799" ixy="0.0" ixz="0.0"
+				iyy="0.07653" iyz="0.0" izz="0.02914"/>
+		</inertial>
+        <visual>
+            <geometry>
+                <mesh filename="package://robotplus_description/models/qr_wall/meshes/qr_wall.dae"/>
+            </geometry>
+            <material name="">
+				<color rgba="0.4980392 0.4980392 1.0 1"/>
+			</material>
+        </visual>
+    </link>
+
+
+    <joint name="marker_fixed" type="fixed">
+        <origin xyz="1.36 2.42 0.06" rpy="0 0 0"/>
+        <parent link="machine"/>
+        <child link="marker_plate"/>
+    </joint>
+    <joint name="jig_cam" type="fixed">
+        <origin xyz="-0.0583225279657438 0 -0.0820000000000001" rpy="3.14159265358979 0 1.5707963267949" />
+        <parent link="gripper_cam_jig" />
+        <child link="cam" />
+        <axis xyz="0 0 0" />
+    </joint>
+    <joint name="machine_fixed" type="fixed">
+		<origin xyz="-0.58 -1.52 0" rpy="0 -1.5709 0" />
+		<parent link="world" />
+		<child link="machine" />
+	</joint>
+	<joint name="base_fixed" type="fixed">
+		<origin xyz="0.42 0.62 0" rpy="-1.5709 0 3.1416"/>
+		<parent link="base_link"/>
+		<child link="base"/>
+	</joint>
+	<!-- <joint name="base_link_fixed" type="fixed">
+		<origin xyz="0 0.05 0.77" rpy="0 0 -1.5709"/>
+		<parent link="world"/>
+		<child link="base_link"/>
+	</joint> -->
+	<joint name="base_link_fixed" type="fixed">
+		<origin xyz="0 0.05 0.77" rpy="0 0 -1.4509"/>
+		<parent link="world"/>
+		<child link="base_link"/>
+	</joint>
+    <joint name="q1" type="revolute">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="link1" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="q2" type="revolute">
+        <origin xyz="0 0 0.1807" rpy="1.5708 1.5708 0" />
+        <parent link="link1" />
+        <child link="link2" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="q3" type="revolute">
+        <origin xyz="-0.6127 0 0" rpy="0 0 0" />
+        <parent link="link2" />
+        <child link="link3" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="q4" type="revolute">
+        <origin xyz="-0.57155 0 0" rpy="0 0 -1.5708" />
+        <parent link="link3" />
+        <child link="link4" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="q5" type="revolute">
+        <origin xyz="0 0 0.17415" rpy="1.5708 0 0" />
+        <parent link="link4" />
+        <child link="link5" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="q6" type="revolute">
+        <origin xyz="0 0 0.11985" rpy="-1.5708 0 0" />
+        <parent link="link5" />
+        <child link="link6" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+    </joint>
+    <joint name="link6_jig" type="fixed">
+        <origin xyz="0 0 0.12" rpy="3.1416 0 1.5709" />
+        <parent link="link6" />
+        <child link="gripper_cam_jig" />
+        <axis xyz="0 0 0" />
+    </joint>
+    <transmission name="trans_q1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q1">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q1_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_q2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q2">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q2_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_q3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q3">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q3_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_q4">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q4">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q4_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_q5">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q5">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q5_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_q6">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="q6">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="q6_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+    <link name="cam_optical" />
+    <joint name="cam_joint" type="fixed">
+        <origin xyz="0 0 0.02495" rpy="-1.5708 -1.5708 3.1416" />
+        <parent link="cam" />
+        <child link="cam_optical" />
+        <axis xyz="0 0 0" />
+    </joint>
+    <gazebo reference="cam_optical">
+        <sensor type="camera" name="Realsense">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <camera>
+                <horizontal_fov>1.085595</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.01</near>
+                    <far>100</far>
+                </clip>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <alwaysOn>true</alwaysOn>
+                <updateRate>30.0</updateRate>
+                <cameraName>camera</cameraName>
+                <frameName>cam_optical</frameName>
+                <imageTopicName>rgb/image_raw</imageTopicName>
+                <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
+                <hackBaselink>0.07</hackBaselink>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+            </plugin>
+        </sensor>
+    </gazebo>
+    <gazebo reference="machine">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="base">
+        <turnGravityOff>true</turnGravityOff>
+     </gazebo>
+</robot>

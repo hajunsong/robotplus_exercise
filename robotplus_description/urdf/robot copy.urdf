@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="robot">
+	<link name="world" />
+	<link name="machine">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/machine.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.31 0.31 0.31 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/machine.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="base">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/base.STL"/>
+			</geometry>
+			<material name="">
+				<color rgba="0.67 0.68 0.69 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/base.STL"/>
+			</geometry>
+		</collision>
+	</link>
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.594117647058824 0.594117647058824 0.594117647058824 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link1">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link2">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link3">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link4">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link5">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="link6">
+		<visual>
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="end" />
+	<joint name="link6_end" type="fixed">
+		<origin xyz="0 0 -0.1153" rpy="1.5708 0 1.5708" />
+		<parent link="link6" />
+		<child link="end" />
+		<axis xyz="0 0 0" />
+	</joint>
+	<link name="gripper_cam_jig">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://keti_robot_description/meshes/gripper_cam_jig.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://keti_robot_description/meshes/gripper_cam_jig.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<link name="cam">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://keti_robot_description/meshes/cam.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://keti_robot_description/meshes/cam.STL" />
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="machine_fixed" type="fixed">
+		<origin xyz="2.1 -3.2 0" rpy="0 -1.5709 0" />
+		<parent link="world" />
+		<child link="machine" />
+	</joint>
+	<joint name="base_fixed" type="fixed">
+		<origin xyz="3.3 -2.1 0.74" rpy="-1.5709 0 1.5709"/>
+		<parent link="world"/>
+		<child link="base"/>
+	</joint>
+	<joint name="base_link_fixed" type="fixed">
+		<origin xyz="0.42 0 0.62" rpy="1.5709 3.1416 0"/>
+		<parent link="base"/>
+		<child link="base_link"/>
+	</joint>
+	<joint name="q1" type="revolute">
+		<origin xyz="0 0 0" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="link1" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="q2" type="revolute">
+		<origin xyz="0 0 0.1807" rpy="1.5708 1.5708 0" />
+		<parent link="link1" />
+		<child link="link2" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="q3" type="revolute">
+		<origin xyz="-0.6127 0 0" rpy="0 0 0" />
+		<parent link="link2" />
+		<child link="link3" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="q4" type="revolute">
+		<origin xyz="-0.57155 0 0" rpy="0 0 -1.5708" />
+		<parent link="link3" />
+		<child link="link4" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="q5" type="revolute">
+		<origin xyz="0 0 0.17415" rpy="1.5708 0 0" />
+		<parent link="link4" />
+		<child link="link5" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="q6" type="revolute">
+		<origin xyz="0 0 0.11985" rpy="-1.5708 0 0" />
+		<parent link="link5" />
+		<child link="link6" />
+		<axis xyz="0 0 1" />
+		<limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
+	</joint>
+	<joint name="link6_jig" type="fixed">
+		<origin xyz="0 0 0.12" rpy="3.1416 0 1.5709" />
+		<parent link="link6" />
+		<child link="gripper_cam_jig" />
+		<axis xyz="0 0 0" />
+	</joint>
+	<joint name="jig_cam" type="fixed">
+		<origin xyz="-0.0583225279657438 0 -0.0820000000000001"
+			rpy="3.14159265358979 0 1.5707963267949" />
+		<parent link="gripper_cam_jig" />
+		<child link="cam" />
+		<axis xyz="0 0 0" />
+	</joint>
+
+</robot>

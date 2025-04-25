@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- <include file="$(find robotplus_moveit_config)/launch/demo_gazebo.launch"/> -->
+    <node 
+        pkg="robotplus_robot_control" 
+        type="robotplus_robot_control" 
+        name="robotplus_robot_control_node" 
+        output="screen" />
+</launch>
