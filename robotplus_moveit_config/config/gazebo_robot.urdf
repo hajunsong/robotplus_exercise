@@ -258,9 +258,12 @@
         </visual>
     </link>
 
-
+                    <!-- <matrix>0.93969 0 -0.34202 -8.5
+                            0 1 0 -10
+                            0.34202 0 0.93969 -7.8
+                            0 0 0 1</matrix> -->
     <joint name="marker_fixed" type="fixed">
-        <origin xyz="1.36 2.42 0.06" rpy="0 0 0"/>
+        <origin xyz="1.14 2.05 -0.14" rpy="0 -0.3490658503988659 0"/>
         <parent link="machine"/>
         <child link="marker_plate"/>
     </joint>
@@ -281,12 +284,12 @@
 		<child link="base"/>
 	</joint>
 	<!-- <joint name="base_link_fixed" type="fixed">
-		<origin xyz="0 0.05 0.77" rpy="0 0 -1.5709"/>
+		<origin xyz="0 0 0.77" rpy="0 0 -1.5709"/>
 		<parent link="world"/>
 		<child link="base_link"/>
 	</joint> -->
 	<joint name="base_link_fixed" type="fixed">
-		<origin xyz="0 0.05 0.77" rpy="0 0 -1.4509"/>
+		<origin xyz="0 0 0.77" rpy="0 0 -1.4509"/>
 		<parent link="world"/>
 		<child link="base_link"/>
 	</joint>
