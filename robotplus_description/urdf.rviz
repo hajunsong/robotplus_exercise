@@ -7,13 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Links1
-        - /RobotModel1/Links1/base1
-        - /RobotModel1/Links1/base_link1
-        - /RobotModel1/Links1/gripper_cam_jig1
-        - /RobotModel1/Links1/link61
-        - /RobotModel1/Links1/machine1
-        - /RobotModel1/Links1/world1
+        - /RobotModel2
       Splitter Ratio: 0.5
     Tree Height: 1068
   - Class: rviz/Selection
@@ -54,7 +48,7 @@ Visualization Manager:
       Offset:
         X: 0
         Y: 0
-        Z: 0
+        Z: -0.7699999809265137
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
@@ -71,12 +65,12 @@ Visualization Manager:
         Link Tree Style: Links in Alphabetic Order
         base:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
           Value: true
         base_link:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
           Value: true
         cam:
@@ -84,13 +78,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        cam_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         end:
           Alpha: 1
           Show Axes: false
           Show Trail: false
         gripper_cam_jig:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
           Value: true
         link1:
@@ -120,20 +118,99 @@ Visualization Manager:
           Value: true
         link6:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
           Value: true
         machine:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        marker_plate:
+          Alpha: 1
+          Show Axes: false
           Show Trail: false
           Value: true
         world:
           Alpha: 1
-          Show Axes: true
+          Show Axes: false
           Show Trail: false
       Name: RobotModel
-      Robot Description: robot_description
+      Robot Description: ori/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        base2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        cam2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        end2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        gripper_cam_jig2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link21:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link22:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link23:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link24:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link25:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link26:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: cor/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -142,7 +219,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: world
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -166,7 +243,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.7597856521606445
+      Distance: 7.076595306396484
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -174,17 +251,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.2229851633310318
-        Y: -0.15770184993743896
-        Z: 1.1368809938430786
+        X: -0.19033005833625793
+        Y: 0.32583296298980713
+        Z: 1.2897899150848389
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.1997961699962616
+      Pitch: 0.6547966003417969
       Target Frame: <Fixed Frame>
-      Yaw: 5.348598480224609
+      Yaw: 0.7604122161865234
     Saved: ~
 Window Geometry:
   Displays:
@@ -192,7 +269,7 @@ Window Geometry:
   Height: 1359
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000004b5fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000004b5000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000004b5fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003b000004b5000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009f40000003efc0100000002fb0000000800540069006d00650100000000000009f40000030700fffffffb0000000800540069006d0065010000000000000450000000000000000000000783000004b500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000004b5fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000004b5000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000004b5fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003b000004b5000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004f40000003efc0100000002fb0000000800540069006d00650100000000000004f40000030700fffffffb0000000800540069006d0065010000000000000450000000000000000000000283000004b500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -201,6 +278,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 2548
-  X: -32
+  Width: 1268
+  X: 1248
   Y: -32

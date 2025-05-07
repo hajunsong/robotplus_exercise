@@ -68,6 +68,7 @@
         "future": "cpp",
         "shared_mutex": "cpp",
         "typeindex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "*.ipp": "cpp"
     }
 }

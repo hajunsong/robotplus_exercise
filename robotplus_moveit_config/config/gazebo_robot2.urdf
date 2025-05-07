@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <robot name="robot">
     <link name="world" />
-    <link name="machine">
+    <!-- <link name="machine">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/machine.STL" />
@@ -21,8 +21,8 @@
             <origin xyz="0 0 0" rpy="0 0 0" />
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
-    </link>
-    <link name="base">
+    </link> -->
+    <link name="base2">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/base.STL" />
@@ -43,7 +43,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="base_link">
+    <link name="base_link2">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
@@ -64,7 +64,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link1">
+    <link name="link21">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
@@ -85,7 +85,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link2">
+    <link name="link22">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
@@ -106,7 +106,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link3">
+    <link name="link23">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
@@ -127,7 +127,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link4">
+    <link name="link24">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
@@ -148,7 +148,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link5">
+    <link name="link25">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
@@ -169,7 +169,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="link6">
+    <link name="link26">
         <visual>
             <geometry>
                 <mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
@@ -190,14 +190,14 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="end" />
-    <joint name="link6_end" type="fixed">
+    <link name="end2" />
+    <joint name="link26_end2" type="fixed">
         <origin xyz="0 0 0.12" rpy="3.1415 0 1.5708" />
-        <parent link="link6" />
-        <child link="end" />
+        <parent link="link26" />
+        <child link="end2" />
         <axis xyz="0 0 0" />
     </joint>
-    <link name="gripper_cam_jig">
+    <link name="gripper_cam_jig2">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
@@ -219,7 +219,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="cam">
+    <link name="cam2">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
@@ -241,7 +241,7 @@
             <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
         </inertial>
     </link>
-    <link name="marker_plate">
+    <!-- <link name="marker_plate">
         <inertial>
 			<origin xyz="0.0 0.009 0.0" rpy="0 0 0"/>
 			<mass value="2.83099"/>
@@ -256,147 +256,147 @@
 				<color rgba="0.4980392 0.4980392 1.0 1"/>
 			</material>
         </visual>
-    </link>
+    </link> -->
 
                     <!-- <matrix>0.93969 0 -0.34202 -8.5
                             0 1 0 -10
                             0.34202 0 0.93969 -7.8
                             0 0 0 1</matrix> -->
-    <joint name="marker_fixed" type="fixed">
+    <!-- <joint name="marker_fixed" type="fixed">
         <origin xyz="1.14 2.05 -0.14" rpy="0 -0.3490658503988659 0"/>
         <parent link="machine"/>
         <child link="marker_plate"/>
-    </joint>
-    <joint name="jig_cam" type="fixed">
+    </joint> -->
+    <joint name="jig_cam2" type="fixed">
         <origin xyz="-0.0583225279657438 0 -0.0820000000000001" rpy="3.14159265358979 0 1.5707963267949" />
-        <parent link="gripper_cam_jig" />
-        <child link="cam" />
+        <parent link="gripper_cam_jig2" />
+        <child link="cam2" />
         <axis xyz="0 0 0" />
     </joint>
-    <joint name="machine_fixed" type="fixed">
+    <!-- <joint name="machine_fixed" type="fixed">
 		<origin xyz="-0.58 -1.52 0" rpy="0 -1.5709 0" />
 		<parent link="world" />
 		<child link="machine" />
-	</joint>
-	<joint name="base_fixed" type="fixed">
+	</joint> -->
+	<joint name="base_fixed2" type="fixed">
 		<origin xyz="0.42 0.62 0" rpy="-1.5709 0 3.1416"/>
-		<parent link="base_link"/>
-		<child link="base"/>
+		<parent link="base_link2"/>
+		<child link="base2"/>
 	</joint>
-	<joint name="base_link_fixed" type="fixed">
+	<!-- <joint name="base_link_fixed" type="fixed">
 		<origin xyz="0 0 0.77" rpy="0 0 -1.5709"/>
 		<parent link="world"/>
 		<child link="base_link"/>
-	</joint>
-	<!-- <joint name="base_link_fixed" type="fixed">
+	</joint> -->
+	<joint name="base_link_fixed2" type="fixed">
 		<origin xyz="0 0 0.77" rpy="0 0 -1.4509"/>
 		<parent link="world"/>
-		<child link="base_link"/>
-	</joint> -->
-    <joint name="q1" type="revolute">
+		<child link="base_link2"/>
+	</joint>
+    <joint name="q21" type="revolute">
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <parent link="base_link" />
-        <child link="link1" />
+        <parent link="base_link2" />
+        <child link="link21" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="q2" type="revolute">
+    <joint name="q22" type="revolute">
         <origin xyz="0 0 0.1807" rpy="1.5708 1.5708 0" />
-        <parent link="link1" />
-        <child link="link2" />
+        <parent link="link21" />
+        <child link="link22" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="q3" type="revolute">
+    <joint name="q23" type="revolute">
         <origin xyz="-0.6127 0 0" rpy="0 0 0" />
-        <parent link="link2" />
-        <child link="link3" />
+        <parent link="link22" />
+        <child link="link23" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="q4" type="revolute">
+    <joint name="q24" type="revolute">
         <origin xyz="-0.57155 0 0" rpy="0 0 -1.5708" />
-        <parent link="link3" />
-        <child link="link4" />
+        <parent link="link23" />
+        <child link="link24" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="q5" type="revolute">
+    <joint name="q25" type="revolute">
         <origin xyz="0 0 0.17415" rpy="1.5708 0 0" />
-        <parent link="link4" />
-        <child link="link5" />
+        <parent link="link24" />
+        <child link="link25" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="q6" type="revolute">
+    <joint name="q26" type="revolute">
         <origin xyz="0 0 0.11985" rpy="-1.5708 0 0" />
-        <parent link="link5" />
-        <child link="link6" />
+        <parent link="link25" />
+        <child link="link26" />
         <axis xyz="0 0 1" />
         <limit lower="-3.14" upper="3.14" effort="100" velocity="10" />
     </joint>
-    <joint name="link6_jig" type="fixed">
+    <joint name="link26_jig2" type="fixed">
         <origin xyz="0 0 0.12" rpy="3.1416 0 1.5709" />
-        <parent link="link6" />
-        <child link="gripper_cam_jig" />
+        <parent link="link26" />
+        <child link="gripper_cam_jig2" />
         <axis xyz="0 0 0" />
     </joint>
-    <transmission name="trans_q1">
+    <transmission name="trans_q21">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q1">
+        <joint name="q21">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q1_motor">
+        <actuator name="q21_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_q2">
+    <transmission name="trans_q22">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q2">
+        <joint name="q22">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q2_motor">
+        <actuator name="q22_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_q3">
+    <transmission name="trans_q23">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q3">
+        <joint name="q23">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q3_motor">
+        <actuator name="q23_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_q4">
+    <transmission name="trans_q24">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q4">
+        <joint name="q24">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q4_motor">
+        <actuator name="q24_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_q5">
+    <transmission name="trans_q25">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q5">
+        <joint name="q25">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q5_motor">
+        <actuator name="q25_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
-    <transmission name="trans_q6">
+    <transmission name="trans_q26">
         <type>transmission_interface/SimpleTransmission</type>
-        <joint name="q6">
+        <joint name="q26">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
         </joint>
-        <actuator name="q6_motor">
+        <actuator name="q26_motor">
             <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
@@ -406,14 +406,14 @@
             <robotNamespace>/</robotNamespace>
         </plugin>
     </gazebo>
-    <link name="cam_optical" />
+    <!-- <link name="cam_optical" />
     <joint name="cam_joint" type="fixed">
         <origin xyz="0 0 0.02495" rpy="-1.5708 -1.5708 3.1416" />
         <parent link="cam" />
         <child link="cam_optical" />
         <axis xyz="0 0 0" />
-    </joint>
-    <gazebo reference="cam_optical">
+    </joint> -->
+    <!-- <gazebo reference="cam_optical">
         <sensor type="camera" name="Realsense">
             <always_on>true</always_on>
             <visualize>true</visualize>
@@ -444,11 +444,11 @@
                 <distortionT2>0.0</distortionT2>
             </plugin>
         </sensor>
+    </gazebo> -->
+    <gazebo reference="machine2">
+        <material>Gazebo/DarkGrey</material>
     </gazebo>
-    <gazebo reference="machine">
-        <material>Gazebo/Grey</material>
-    </gazebo>
-    <gazebo reference="base">
+    <gazebo reference="base2">
         <turnGravityOff>true</turnGravityOff>
      </gazebo>
 </robot>

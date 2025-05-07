@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- <include file="$(find robotplus_moveit_config)/launch/demo_gazebo.launch"/> -->
+    <node pkg="robotplus_validation" type="robotplus_validation" name="robotplus_validation_node" output="screen" />
+</launch>

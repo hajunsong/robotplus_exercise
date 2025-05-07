@@ -108,17 +108,17 @@ void movel_machine(double cmd[7]){
 	Eigen::Vector4d quat(cmd[3], cmd[4], cmd[5], cmd[6]);
 	mat = quat2mat(quat);
 
-	std::cout << "origin command : " << vec.transpose() << quat.transpose() << std::endl;
+	std::cout << "ori command : " << vec.transpose() << " " << quat.transpose() << std::endl;
 
 	Eigen::Matrix3d target_mat;
 	Eigen::Vector3d target_vec;
-	target_mat = mat*err_mat;
-	target_vec = vec + err_vec;
+	target_mat = err_mat.transpose()*mat;
+	target_vec = err_mat.transpose()*vec;
 
 	Eigen::Vector4d target_quat;
 	target_quat = mat2quat(target_mat);
 
-	std::cout << "correction command : " << target_vec.transpose() << target_quat.transpose() << std::endl;
+	std::cout << "cor command : " << target_vec.transpose() << " "  << target_quat.transpose() << std::endl;
 
 	geometry_msgs::Pose target_pose;
 	target_pose.position.x = target_vec(0);
@@ -166,30 +166,14 @@ void movel_base(double cmd[7]){
 static void *logging(void *arg)
 {
 	std::ofstream fout;
-	fout.open("/home/keti/logging.txt");
+	fout.open("/home/keti/logging_cor.txt");
+
+	std::ofstream fout_joint;
+	fout_joint.open("/home/keti/logging_cor_jnt.txt");
+	double t_stamp = 0;
 	while (run)
 	{
 		geometry_msgs::Pose current_pose = move_group->getCurrentPose().pose;
-
-		// Eigen::Vector4d quat(
-		// 	current_pose.orientation.x,
-		// 	current_pose.orientation.y,
-		// 	current_pose.orientation.z,
-		// 	current_pose.orientation.w);
-		// Eigen::Matrix3d mat = quat2mat(quat);
-		// Eigen::Vector3d vec(current_pose.position.x, current_pose.position.y, current_pose.position.z);
-
-		// Eigen::Vector3d ref(0.58, 1.52, -0.77);
-		// Eigen::Vector3d value = vec + ref;
-
-		// fout << value(0) << ", ";
-		// fout << value(1) << ", ";
-		// fout << value(2) << ", ";
-		// fout << quat(0) << ", ";
-		// fout << quat(1) << ", ";
-		// fout << quat(2) << ", ";
-		// fout << quat(3) << ", ";
-		// fout << "\n";
 
 		// ROS_INFO("current pose : %f, %f, %f, %f, %f, %f, %f", current_pose.position.x, current_pose.position.y, current_pose.position.z,
 		// 		 current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w);
@@ -203,8 +187,16 @@ static void *logging(void *arg)
 		fout << current_pose.orientation.z << ", ";
 		fout << current_pose.orientation.w << ", ";
 		fout << "\n";
-		
+
+		std::vector<double> current_joint = move_group->getCurrentJointValues();
+		fout_joint << t_stamp << ", ";
+		for(int i = 0; i < 6; i++){
+			fout_joint << current_joint[i] << ", ";
+		}
+		fout_joint << "\n";
+
 		ros::Duration(0.01).sleep();
+		t_stamp += 0.01;
 	}
 
 	fout.close();
@@ -251,69 +243,55 @@ int main(int argc, char **argv)
 	// ROS_INFO("current pose : %f, %f, %f, %f, %f, %f, %f", current_pose.position.x, current_pose.position.y, current_pose.position.z,
 	// 	current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w);
 
-	/*
-	rmat : 
-		[-0.01667032905351939, -0.9996741189203842, 0.01933277243441882;
-		-0.9682836212379602, 0.01131989249562371, -0.2495970530198424;
-		0.2492968691571354, -0.022880471905998, -0.9681567822588493]
-	rvec : 
-		[2.08138038104656; -2.111194324262539; 0.2881816835208755]
-
-
-		 
-	rmat : 
-		[-0.01763863662019094, -0.9998443685631652, -0.0003422728540694031;
-		-0.971190654610366, 0.01721451000175778, -0.2376812425137677;
-		0.2376501438999562, -0.003859960870936846, -0.9713431472998638]
-	rvec : 
-		[2.0761773734942; -2.113214277401341; 0.2544259109239245]
-
-	rmat : 
-		[0.02218223345940262, -0.9959708212897407, -0.08689114833049828;
-		-0.9739737036141656, -0.001918510018832809, -0.2266529152413748;
-		0.225572988602046, 0.08965736143088146, -0.9700919463403422]
-	rvec : 
-		[2.072766652543755;
-		-2.047563076240862;
-		0.1441460974638388]
-	*/
-
-	Eigen::Vector3d Pe(0.1629, 0.83973, 1.2521);
-	Eigen::Vector4d Qe(-0.019746, 0.69402, 0.0069196, 0.71965);
-	Eigen::Matrix3d Ce = quat2mat(Qe);
-	Eigen::Vector3d Pc(0.07888, 0.83765, 1.3074);
-	Eigen::Vector4d Qc(0.50403, 0.51371, -0.50471, -0.47679);
+	Eigen::Vector3d Pc(-0.78765, 0.078789, 0.53742);
+	Eigen::Vector4d Qc(-0.0067942, 0.71963, -0.69405, 0.019816);
 	Eigen::Matrix3d Cc = quat2mat(Qc);
-	Eigen::Vector3d Pec = Ce*(Pe - Pc);
-	
-	Eigen::Matrix3d Co;
-	Co << 0.02079979022011202, -0.9931313380198488, -0.1151412791734756,
-		-0.9688248701263298, 0.008415847203304017, -0.2476036036501706,
-		0.2468719096039472, 0.1167018378550893, -0.9619952917191149;
-	Eigen::Vector3d vo(2.041728447677992, -2.028881651911355, 0.1362241715515326);
-	Eigen::Matrix3d Cn;
-	Cn << 0.05684853735547113, -0.9802133262601278, -0.1896050601186586,
-		-0.9754485223895604, -0.01405994482785733, -0.2197782931034389,
-		0.2127637750383441, 0.1974440502357417, -0.9569469280257598;
-	Eigen::Vector3d vn(2.049605114996181, -1.976637243471908, 0.02340710304943872);
+
+	// current cam pose : 0.078848, 0.787577, 1.307499, -0.504048, -0.513677, 0.504755, 0.476753
+
+	Eigen::Matrix3d Co, Cn;
+	Eigen::Matrix3d Cco;
+	Cco << 0.02242925132699292, -0.9933483061549334, -0.1129427790699121,
+		-0.9682068651796899, 0.006570538724136266, -0.250064580138396,
+		0.2491433220133107, 0.1149607353838649, -0.9616192772694258;
+
+		// 0.02077173700983082, -0.9930904968057878, -0.1154980523456063;
+		// -0.9690047285460736, 0.008446657992312701, -0.2468977319136637;
+		// 0.246167363793304, 0.1170466536163887, -0.9621339355205492
+	Eigen::Vector3d vco(2.043150891717752, -2.026699269469365, 0.1407238220564062);
+	Eigen::Matrix3d Ccn;
+	Ccn << 0.05608896767467619, -0.9813839750664258, -0.1836832087807966,
+		-0.9760775539166969, -0.01519067560784926, -0.2168913371127911,
+		0.2100634105340253, 0.1914542683185666, -0.958758899149007;
+	Eigen::Vector3d vcn(2.054386062180801, -1.980938587294669, 0.02669659598405302);
+
+	Co = Cc*Cco;
+	Cn = Cc*Ccn;
+
+	std::cout << "cal : " << std::endl;
+	std::cout << Co << std::endl << std::endl;
+	std::cout << Cn << std::endl;
+
 	Eigen::Vector3d Vo(-0.52995, -0.44017, 0.37001), Vn(-0.57884, -0.37357, 0.37001);
 	Eigen::Vector4d Qo(0.57928, -0.57922, 0.40557, 0.40553), Qn(-0.5435, 0.61291, -0.38052, -0.42912);
-	// Eigen::Matrix3d Co, Cn;
 	Co = quat2mat(Qo);
 	Cn = quat2mat(Qn);
 
-	double ang = 0.12;
-	Eigen::Matrix3d temp_mat;
-	err_mat << cos(ang), -sin(ang), 0, sin(ang), cos(0), 0, 0, 0, 1;
+	std::cout << "ans : " << std::endl;
+	std::cout << Co << std::endl << std::endl;
+	std::cout << Cn << std::endl;
+
+	// double ang = 0.12;
+	// Eigen::Matrix3d temp_mat;
+	// err_mat << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
 	
 	err_mat = (Cn.transpose()*Co);
-	err_vec = Cn*(Vo - Vn);
+	err_vec = (Vo - Vn);
 
-	std::cout << Cn << std::endl;
-	std::cout << Co << std::endl;
-
-	std::cout << err_mat << std::endl;
-	std::cout << (Cn.transpose()*Co) << std::endl;
+	// std::cout << "ans : " << std::endl;
+	// std::cout << err_mat << std::endl;
+	// std::cout << "cal : " << std::endl;
+	// std::cout << Co*Cn.transpose() << std::endl;
 
 	ros::init(argc, argv, "robotplus_robot_control_node");
 	ros::NodeHandle nh;
@@ -328,11 +306,18 @@ int main(int argc, char **argv)
 	move_group->setStartStateToCurrentState();
 
 	move_group->setPoseReferenceFrame("base_link");
-	std::cout << move_group->getPlanningFrame() << std::endl;
+	move_group->setEndEffectorLink("cam");
+	// std::cout << move_group->getPlanningFrame() << std::endl;
+	
+	// geometry_msgs::Pose current_cam_pose = move_group->getCurrentPose().pose;
+	// ROS_INFO("current cam pose : %f, %f, %f, %f, %f, %f, %f", current_cam_pose.position.x, current_cam_pose.position.y, current_cam_pose.position.z,
+	// 	current_cam_pose.orientation.x, current_cam_pose.orientation.y, current_cam_pose.orientation.z, current_cam_pose.orientation.w);
 
-#if 1
+	
+
+#if 0
 	// err_mat = Eigen::Matrix3d::Identity();
-	// err_vec = Eigen::Vector3d::Zero();
+	err_vec = Eigen::Vector3d::Zero();
 
 	pthread_t t_logging;
 	run = true;
