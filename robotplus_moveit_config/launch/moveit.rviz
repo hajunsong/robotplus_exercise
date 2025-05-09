@@ -13,7 +13,6 @@ Panels:
         - /RobotModel1/Links1/machine1
         - /RobotModel1/Links1/marker_plate1
         - /RobotModel1/Links1/world1
-        - /MotionPlanning1
         - /MotionPlanning1/Planning Request1
       Splitter Ratio: 0.5
     Tree Height: 1130
@@ -286,5 +285,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1268
-  X: 3808
+  X: -32
   Y: -32

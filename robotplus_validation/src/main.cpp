@@ -71,15 +71,15 @@ int main(int argc, char** argv){
         }
 
         msg1.header.stamp = ros::Time::now();
+        msg2.header.stamp = msg1.header.stamp;
         for(int i = 0; i < 6; i++){
             msg1.position[i] = joint1[i + 1];
         }
-        pub1.publish(msg1);
         
-        msg2.header.stamp = ros::Time::now();
         for(int i = 0; i < 6; i++){
             msg2.position[i] = joint2[i + 1];
         }
+        pub1.publish(msg1);
         pub2.publish(msg2);
 
         if(line1.size() == 0 && line2.size() == 0){
@@ -88,17 +88,19 @@ int main(int argc, char** argv){
             break;
         }
 
-		ros::Duration(0.01).sleep();
+		ros::Duration(0.02).sleep();
     }
 
     msg1.header.stamp = ros::Time::now();
-    msg2.header.stamp = ros::Time::now();
+    msg2.header.stamp = msg1.header.stamp;
     
     for(int i = 0; i < 6; i++) msg1.position[i] = 0;
     for(int i = 0; i < 6; i++) msg2.position[i] = 0;
 
     pub1.publish(msg1);
     pub2.publish(msg2);
+
+    ros::Duration(0.02).sleep();
     
 	ros::shutdown();
 	return 0;

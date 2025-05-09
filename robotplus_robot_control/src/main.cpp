@@ -6,83 +6,13 @@
 #include <fstream>
 
 #include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/Geometry>
+#include <eigen3/Eigen/Core>
 
 moveit::planning_interface::MoveGroupInterface *move_group;
 bool run = false;
 Eigen::Matrix3d err_mat = Eigen::Matrix3d::Identity();
 Eigen::Vector3d err_vec = Eigen::Vector3d::Zero();
-
-Eigen::Vector4d mat2quat(Eigen::Matrix3d mat){
-	double tr = mat(0, 0) + mat(1, 1) + mat(2, 2);
-	double m00, m01, m02, m10, m11, m12, m20, m21, m22;
-	double qw, qx, qy, qz;
-	m00 = mat(0, 0); m01 = mat(0, 1); m02 = mat(0, 2);
-	m10 = mat(1, 0); m11 = mat(1, 1); m12 = mat(1, 2);
-	m20 = mat(2, 0); m21 = mat(2, 1); m22 = mat(2, 2);
-
-	if (tr > 0) {
-		double S = sqrt(tr + 1.0) * 2; // S=4*qw
-		qw = 0.25 * S;
-		qx = (m21 - m12) / S;
-		qy = (m02 - m20) / S;
-		qz = (m10 - m01) / S;
-	}
-	else if ((m00 > m11) & (m00 > m22)) {
-		double S = sqrt(1.0 + m00 - m11 - m22) * 2; // S=4*qx
-		qw = (m21 - m12) / S;
-		qx = 0.25 * S;
-		qy = (m01 + m10) / S;
-		qz = (m02 + m20) / S;
-	}
-	else if (m11 > m22) {
-		double S = sqrt(1.0 + m11 - m00 - m22) * 2; // S=4*qy
-		qw = (m02 - m20) / S;
-		qx = (m01 + m10) / S;
-		qy = 0.25 * S;
-		qz = (m12 + m21) / S;
-	}
-	else {
-		double S = sqrt(1.0 + m22 - m00 - m11) * 2; // S=4*qz
-		qw = (m10 - m01) / S;
-		qx = (m02 + m20) / S;
-		qy = (m12 + m21) / S;
-		qz = 0.25 * S;
-	}
-
-	Eigen::Vector4d quat(qx, qy, qz, qw);
-	return quat;
-}
-
-Eigen::Matrix3d quat2mat(Eigen::Vector4d quat){
-	Eigen::Matrix3d mat;
-
-	double sqx = quat(0)*quat(0);
-	double sqy = quat(1)*quat(1);
-	double sqz = quat(2)*quat(2);
-	double sqw = quat(3)*quat(3);
-
-	// invs (inverse square length) is only required if quaternion is not already normalised
-	double invs = 1 / (sqx + sqy + sqz + sqw);
-	mat(0, 0) = ( sqx - sqy - sqz + sqw)*invs; // since sqw + sqx + sqy + sqz =1/invs*invs
-	mat(1, 1) = (-sqx + sqy - sqz + sqw)*invs;
-	mat(2, 2) = (-sqx - sqy + sqz + sqw)*invs;
-	
-	double tmp1 = quat(0)*quat(1);
-	double tmp2 = quat(2)*quat(3);
-	mat(1, 0) = 2.0 * (tmp1 + tmp2)*invs;
-	mat(0, 1) = 2.0 * (tmp1 - tmp2)*invs;
-	
-	tmp1 = quat(0)*quat(2);
-	tmp2 = quat(1)*quat(3);
-	mat(2, 0) = 2.0 * (tmp1 - tmp2)*invs;
-	mat(0, 2) = 2.0 * (tmp1 + tmp2)*invs;
-	tmp1 = quat(1)*quat(2);
-	tmp2 = quat(0)*quat(3);
-	mat(2, 1) = 2.0 * (tmp1 + tmp2)*invs;
-	mat(1, 2) = 2.0 * (tmp1 - tmp2)*invs;
-
-	return mat;
-}
 
 void movej(double cmd[6]){
 	std::vector<double> target_joint(6, 0);
@@ -105,29 +35,32 @@ void movej(double cmd[6]){
 void movel_machine(double cmd[7]){
 	Eigen::Matrix3d mat;
 	Eigen::Vector3d vec(cmd[0], cmd[1], cmd[2]);
-	Eigen::Vector4d quat(cmd[3], cmd[4], cmd[5], cmd[6]);
-	mat = quat2mat(quat);
+	// Eigen::Vector4d quat(cmd[3], cmd[4], cmd[5], cmd[6]);
+	// mat = quat2mat(quat);
+	Eigen::Quaterniond quat(cmd[6], cmd[3], cmd[4], cmd[5]);
+	mat = quat.toRotationMatrix();
 
-	std::cout << "ori command : " << vec.transpose() << " " << quat.transpose() << std::endl;
+	std::cout << "ori command : " << vec.transpose() << " " << quat.w() << " " << quat.vec().transpose() << std::endl;
 
 	Eigen::Matrix3d target_mat;
 	Eigen::Vector3d target_vec;
-	target_mat = err_mat.transpose()*mat;
-	target_vec = err_mat.transpose()*vec;
+	target_mat = err_mat*mat;
+	target_vec = err_mat*vec + err_vec;
 
-	Eigen::Vector4d target_quat;
-	target_quat = mat2quat(target_mat);
+	// Eigen::Vector4d target_quat;
+	// target_quat = mat2quat(target_mat);
+	Eigen::Quaterniond target_quat(target_mat);
 
-	std::cout << "cor command : " << target_vec.transpose() << " "  << target_quat.transpose() << std::endl;
+	std::cout << "cor command : " << target_vec.transpose() << " "  << target_quat.w() << " " << target_quat.vec().transpose() << std::endl;
 
 	geometry_msgs::Pose target_pose;
 	target_pose.position.x = target_vec(0);
 	target_pose.position.y = target_vec(1);
 	target_pose.position.z = target_vec(2);
-	target_pose.orientation.x = target_quat(0);
-	target_pose.orientation.y = target_quat(1);
-	target_pose.orientation.z = target_quat(2);
-	target_pose.orientation.w = target_quat(3);
+	target_pose.orientation.x = target_quat.x();
+	target_pose.orientation.y = target_quat.y();
+	target_pose.orientation.z = target_quat.z();
+	target_pose.orientation.w = target_quat.w();
 
 	std::vector<geometry_msgs::Pose> waypoints;
 	waypoints.push_back(target_pose);
@@ -166,10 +99,10 @@ void movel_base(double cmd[7]){
 static void *logging(void *arg)
 {
 	std::ofstream fout;
-	fout.open("/home/keti/logging_cor.txt");
+	fout.open("/home/keti/logging.txt");
 
 	std::ofstream fout_joint;
-	fout_joint.open("/home/keti/logging_cor_jnt.txt");
+	fout_joint.open("/home/keti/logging_jnt.txt");
 	double t_stamp = 0;
 	while (run)
 	{
@@ -244,54 +177,72 @@ int main(int argc, char **argv)
 	// 	current_pose.orientation.x, current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w);
 
 	Eigen::Vector3d Pc(-0.78765, 0.078789, 0.53742);
-	Eigen::Vector4d Qc(-0.0067942, 0.71963, -0.69405, 0.019816);
-	Eigen::Matrix3d Cc = quat2mat(Qc);
+	// Eigen::Vector4d Qc(-0.0067942, 0.71963, -0.69405, 0.019816);
+	// Eigen::Matrix3d Cc = quat2mat(Qc);
+	// Eigen::Quaterniond Qc(0.019778, -0.0068241, 0.71963, -0.69404);
+	Eigen::Quaterniond Qc(0.72018, 0.019246, 0.0064008, -0.69349);
+	Eigen::Matrix3d Cc = Qc.toRotationMatrix();
 
 	// current cam pose : 0.078848, 0.787577, 1.307499, -0.504048, -0.513677, 0.504755, 0.476753
 
 	Eigen::Matrix3d Co, Cn;
-	Eigen::Matrix3d Cco;
-	Cco << 0.02242925132699292, -0.9933483061549334, -0.1129427790699121,
-		-0.9682068651796899, 0.006570538724136266, -0.250064580138396,
-		0.2491433220133107, 0.1149607353838649, -0.9616192772694258;
+	// Eigen::Matrix3d Cco;
+	// Cco << 0.02242925132699292, -0.9933483061549334, -0.1129427790699121,
+	// 	-0.9682068651796899, 0.006570538724136266, -0.250064580138396,
+	// 	0.2491433220133107, 0.1149607353838649, -0.9616192772694258;
 
-		// 0.02077173700983082, -0.9930904968057878, -0.1154980523456063;
-		// -0.9690047285460736, 0.008446657992312701, -0.2468977319136637;
-		// 0.246167363793304, 0.1170466536163887, -0.9621339355205492
-	Eigen::Vector3d vco(2.043150891717752, -2.026699269469365, 0.1407238220564062);
-	Eigen::Matrix3d Ccn;
-	Ccn << 0.05608896767467619, -0.9813839750664258, -0.1836832087807966,
-		-0.9760775539166969, -0.01519067560784926, -0.2168913371127911,
-		0.2100634105340253, 0.1914542683185666, -0.958758899149007;
-	Eigen::Vector3d vcn(2.054386062180801, -1.980938587294669, 0.02669659598405302);
+	// 	// 0.02077173700983082, -0.9930904968057878, -0.1154980523456063;
+	// 	// -0.9690047285460736, 0.008446657992312701, -0.2468977319136637;
+	// 	// 0.246167363793304, 0.1170466536163887, -0.9621339355205492
+	// Eigen::Vector3d vco(2.043150891717752, -2.026699269469365, 0.1407238220564062);
+	// Eigen::Matrix3d Ccn;
+	// Ccn << 0.05608896767467619, -0.9813839750664258, -0.1836832087807966,
+	// 	-0.9760775539166969, -0.01519067560784926, -0.2168913371127911,
+	// 	0.2100634105340253, 0.1914542683185666, -0.958758899149007;
+	// Eigen::Vector3d vcn(2.054386062180801, -1.980938587294669, 0.02669659598405302);
 
-	Co = Cc*Cco;
-	Cn = Cc*Ccn;
+	// Eigen::Matrix3d temp, temp2;
+	// temp << 0, 0, 1, 
+	// 		-1, 0, 0, 
+	// 		0, -1, 0;
+	// temp2 << -1, 0, 0, 
+	// 		0, -1, 0, 
+	// 		0, 0, 1;
+	// Co = Cc*temp*Cco;
+	// Cn = Cc*Ccn;
 
-	std::cout << "cal : " << std::endl;
-	std::cout << Co << std::endl << std::endl;
-	std::cout << Cn << std::endl;
-
-	Eigen::Vector3d Vo(-0.52995, -0.44017, 0.37001), Vn(-0.57884, -0.37357, 0.37001);
-	Eigen::Vector4d Qo(0.57928, -0.57922, 0.40557, 0.40553), Qn(-0.5435, 0.61291, -0.38052, -0.42912);
-	Co = quat2mat(Qo);
-	Cn = quat2mat(Qn);
-
-	std::cout << "ans : " << std::endl;
-	std::cout << Co << std::endl << std::endl;
-	std::cout << Cn << std::endl;
-
-	// double ang = 0.12;
-	// Eigen::Matrix3d temp_mat;
-	// err_mat << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
-	
-	err_mat = (Cn.transpose()*Co);
-	err_vec = (Vo - Vn);
-
-	// std::cout << "ans : " << std::endl;
-	// std::cout << err_mat << std::endl;
 	// std::cout << "cal : " << std::endl;
-	// std::cout << Co*Cn.transpose() << std::endl;
+	// std::cout << Co << std::endl << std::endl;
+	// std::cout << Cn << std::endl;
+
+	Eigen::Vector3d Vo(-0.52995, -0.44017, 0.37001), Vn(-0.78936, -0.44893, 0.37001);
+	Eigen::Quaterniond Qo(0.405529, 0.579279, -0.579219, 0.405571), Qn(-0.429119, -0.543504, 0.612913, -0.380524);
+	Co = Qo.normalized().toRotationMatrix();
+	Cn = Qn.normalized().toRotationMatrix();
+	// Eigen::Quaterniond Qerr = Qo.inverse()*Qn;
+
+	Eigen::Quaterniond Qerr = Qo.conjugate() * Qn;        // A → B
+	Eigen::Matrix3d err_mat2 = Qerr.normalized().toRotationMatrix();
+	std::cout << err_mat2 << std::endl;
+
+	double ang = 0.12;
+	Eigen::Matrix3d mat;
+	mat << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
+	std::cout << "mat : \n";
+	std::cout << mat << std::endl;
+
+	err_mat = Co*Cn.transpose();
+	std::cout << "err mat : \n";
+	std::cout << err_mat << std::endl;
+	assert((err_mat * err_mat.transpose() - Eigen::Matrix3d::Identity()).norm() < 1e-6);
+	
+	// err_vec = -(Cn*Vo - Vn);
+	err_vec = (err_mat*Vn - Vo);
+	// std::cout << std::endl << err_vec << std::endl << std::endl;
+	// err_vec << -0.1, 0.2, 0;
+
+	std::cout << std::endl << err_mat*Vn << std::endl << std::endl;
+	std::cout << std::endl << Vo << std::endl << std::endl;
 
 	ros::init(argc, argv, "robotplus_robot_control_node");
 	ros::NodeHandle nh;
@@ -306,18 +257,17 @@ int main(int argc, char **argv)
 	move_group->setStartStateToCurrentState();
 
 	move_group->setPoseReferenceFrame("base_link");
-	move_group->setEndEffectorLink("cam");
+	// move_group->setEndEffectorLink("cam");
 	// std::cout << move_group->getPlanningFrame() << std::endl;
 	
 	// geometry_msgs::Pose current_cam_pose = move_group->getCurrentPose().pose;
 	// ROS_INFO("current cam pose : %f, %f, %f, %f, %f, %f, %f", current_cam_pose.position.x, current_cam_pose.position.y, current_cam_pose.position.z,
 	// 	current_cam_pose.orientation.x, current_cam_pose.orientation.y, current_cam_pose.orientation.z, current_cam_pose.orientation.w);
-
 	
-
-#if 0
+	exit(1);
+#if 1
 	// err_mat = Eigen::Matrix3d::Identity();
-	err_vec = Eigen::Vector3d::Zero();
+	// err_vec = Eigen::Vector3d::Zero();
 
 	pthread_t t_logging;
 	run = true;

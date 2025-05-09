@@ -28,7 +28,7 @@
                 <mesh filename="package://robotplus_description/meshes/base.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.67 0.68 0.69 1" />
+                <color rgba="0.37 0.38 0.39 1" />
             </material>
         </visual>
         <collision>
@@ -49,7 +49,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/base_link.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.594117647058824 0.594117647058824 0.594117647058824 1" />
+                <color rgba="0.794117647058824 0.794117647058824 0.794117647058824 1" />
             </material>
         </visual>
         <collision>
@@ -70,7 +70,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link1.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
@@ -91,7 +91,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link2.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
@@ -112,7 +112,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link3.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
@@ -133,7 +133,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link4.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
@@ -154,7 +154,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link5.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
@@ -175,7 +175,7 @@
                 <mesh filename="package://robotplus_description/meshes/UR10e/link6.STL" />
             </geometry>
             <material name="">
-                <color rgba="0.79216 0.81961 0.93333 1" />
+                <color rgba="0.49216 0.51961 0.63333 1" />
             </material>
         </visual>
         <collision>
