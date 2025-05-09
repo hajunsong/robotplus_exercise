@@ -45,7 +45,7 @@ void movel_machine(double cmd[7]){
 	Eigen::Matrix3d target_mat;
 	Eigen::Vector3d target_vec;
 	target_mat = err_mat*mat;
-	target_vec = err_mat*vec + err_vec;
+	target_vec = err_mat*vec + err_mat*err_vec;
 
 	// Eigen::Vector4d target_quat;
 	// target_quat = mat2quat(target_mat);
@@ -225,24 +225,29 @@ int main(int argc, char **argv)
 	Eigen::Matrix3d err_mat2 = Qerr.normalized().toRotationMatrix();
 	std::cout << err_mat2 << std::endl;
 
-	double ang = 0.12;
+	double ang = -0.12;
 	Eigen::Matrix3d mat;
 	mat << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
 	std::cout << "mat : \n";
 	std::cout << mat << std::endl;
 
-	err_mat = Co*Cn.transpose();
+	err_mat = Cn*Co.transpose();
 	std::cout << "err mat : \n";
 	std::cout << err_mat << std::endl;
-	assert((err_mat * err_mat.transpose() - Eigen::Matrix3d::Identity()).norm() < 1e-6);
+	assert((err_mat * err_mat.transpose() - Eigen::Matrix3d::Identity()).norm() < 1e-6);\
+
+	
+	std::cout << "mat 1 : \n";
+	std::cout << Co << std::endl;
+
+	
+	std::cout << "mat 2: \n";
+	std::cout << Cn*mat.transpose() << std::endl;
 	
 	// err_vec = -(Cn*Vo - Vn);
-	err_vec = (err_mat*Vn - Vo);
-	// std::cout << std::endl << err_vec << std::endl << std::endl;
+	err_vec = -Cn*(Co.transpose()*Vo - Cn.transpose()*Vn);
+	std::cout << std::endl << err_vec << std::endl << std::endl;
 	// err_vec << -0.1, 0.2, 0;
-
-	std::cout << std::endl << err_mat*Vn << std::endl << std::endl;
-	std::cout << std::endl << Vo << std::endl << std::endl;
 
 	ros::init(argc, argv, "robotplus_robot_control_node");
 	ros::NodeHandle nh;
@@ -264,7 +269,7 @@ int main(int argc, char **argv)
 	// ROS_INFO("current cam pose : %f, %f, %f, %f, %f, %f, %f", current_cam_pose.position.x, current_cam_pose.position.y, current_cam_pose.position.z,
 	// 	current_cam_pose.orientation.x, current_cam_pose.orientation.y, current_cam_pose.orientation.z, current_cam_pose.orientation.w);
 	
-	exit(1);
+	// exit(1);
 #if 1
 	// err_mat = Eigen::Matrix3d::Identity();
 	// err_vec = Eigen::Vector3d::Zero();
