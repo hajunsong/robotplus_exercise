@@ -43,11 +43,11 @@ int main(int argc, char** argv){
 	msg2.effort.assign(6, 0);
 
     std::ifstream read1;
-    read1.open("/home/keti/logging_ori_jnt.txt");
+    read1.open("/mnt/c/Users/keti-hajun/Desktop/adsfasdfafdsaf/logging_jnt_ori.txt");
     std::string line1;
     
     std::ifstream read2;
-    read2.open("/home/keti/logging_cor_jnt.txt");
+    read2.open("/home/keti/logging_jnt.txt");
     std::string line2;
 
     while(ros::ok()){

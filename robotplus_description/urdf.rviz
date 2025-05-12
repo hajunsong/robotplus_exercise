@@ -7,7 +7,13 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /RobotModel1/Status1
+        - /RobotModel1/Links1
+        - /RobotModel1/Links1/end1
         - /RobotModel2
+        - /RobotModel2/Status1
+        - /RobotModel2/Links1
+        - /RobotModel2/Links1/end21
       Splitter Ratio: 0.5
     Tree Height: 1068
   - Class: rviz/Selection
@@ -84,7 +90,7 @@ Visualization Manager:
           Show Trail: false
         end:
           Alpha: 1
-          Show Axes: false
+          Show Axes: true
           Show Trail: false
         gripper_cam_jig:
           Alpha: 1
@@ -168,7 +174,7 @@ Visualization Manager:
           Value: true
         end2:
           Alpha: 1
-          Show Axes: false
+          Show Axes: true
           Show Trail: false
         gripper_cam_jig2:
           Alpha: 1
@@ -279,5 +285,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 2548
-  X: 0
-  Y: 0
+  X: -32
+  Y: -32

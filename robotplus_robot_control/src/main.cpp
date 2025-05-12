@@ -45,7 +45,7 @@ void movel_machine(double cmd[7]){
 	Eigen::Matrix3d target_mat;
 	Eigen::Vector3d target_vec;
 	target_mat = err_mat*mat;
-	target_vec = err_mat*vec + err_mat*err_vec;
+	target_vec = err_mat*(vec - err_vec);
 
 	// Eigen::Vector4d target_quat;
 	// target_quat = mat2quat(target_mat);
@@ -219,35 +219,14 @@ int main(int argc, char **argv)
 	Eigen::Quaterniond Qo(0.405529, 0.579279, -0.579219, 0.405571), Qn(-0.429119, -0.543504, 0.612913, -0.380524);
 	Co = Qo.normalized().toRotationMatrix();
 	Cn = Qn.normalized().toRotationMatrix();
-	// Eigen::Quaterniond Qerr = Qo.inverse()*Qn;
-
-	Eigen::Quaterniond Qerr = Qo.conjugate() * Qn;        // A → B
-	Eigen::Matrix3d err_mat2 = Qerr.normalized().toRotationMatrix();
-	std::cout << err_mat2 << std::endl;
-
-	double ang = -0.12;
-	Eigen::Matrix3d mat;
-	mat << cos(ang), -sin(ang), 0, sin(ang), cos(ang), 0, 0, 0, 1;
-	std::cout << "mat : \n";
-	std::cout << mat << std::endl;
 
 	err_mat = Cn*Co.transpose();
 	std::cout << "err mat : \n";
 	std::cout << err_mat << std::endl;
 	assert((err_mat * err_mat.transpose() - Eigen::Matrix3d::Identity()).norm() < 1e-6);\
-
 	
-	std::cout << "mat 1 : \n";
-	std::cout << Co << std::endl;
-
-	
-	std::cout << "mat 2: \n";
-	std::cout << Cn*mat.transpose() << std::endl;
-	
-	// err_vec = -(Cn*Vo - Vn);
-	err_vec = -Cn*(Co.transpose()*Vo - Cn.transpose()*Vn);
+	err_vec = Co*(Co.transpose()*Vo - Cn.transpose()*Vn);
 	std::cout << std::endl << err_vec << std::endl << std::endl;
-	// err_vec << -0.1, 0.2, 0;
 
 	ros::init(argc, argv, "robotplus_robot_control_node");
 	ros::NodeHandle nh;
